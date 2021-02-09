@@ -20,7 +20,7 @@ class PostController extends Controller
         return view("home")->withPosts($posts)->withTitle($title);
     }
 
-    public function create(Request $request)
+    public function show_new_post(Request $request)
     {
         if ($request->user()->can_post())
             return view('posts.create');
@@ -28,7 +28,7 @@ class PostController extends Controller
             return redirect('/')->withErrors('You have no privileges to post');
     }
 
-    public function store(Request $request)
+    public function save_post(Request $request)
     {
         $post = new Posts();
         $post->title = $request->title;
