@@ -34,6 +34,7 @@ class PostController extends Controller
         $post->title = $request->title;
         $post->subtitle = $request->subtitle;
         $post->body = $request->body;
+        $post->category = $request->category;
         $post->slug = Str::slug($post->title);
 
         $checkPostSlug = Posts::where('slug', $post->slug)->first();
@@ -49,7 +50,7 @@ class PostController extends Controller
             $message = "Post published";
         }
         $post->save();
-        return redirect('edit/', $post->slug)->withMessage($message);
+        return redirect('edit/'. $post->slug)->withMessage($message);
     }
 
     public function show($slug)
