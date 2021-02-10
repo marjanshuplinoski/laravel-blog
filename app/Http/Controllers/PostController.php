@@ -13,7 +13,7 @@ class PostController extends Controller
     public function index()
     {
         //find latest 20 posts from db
-        $posts = Posts::where("active", 1)->orderBy("created_by", "desc")->paginate(20);
+        $posts = Posts::where("active", 1)->orderBy("created_at", "desc")->paginate(20);
         //heading
         $title = "Newest Posts";
         //return blade view

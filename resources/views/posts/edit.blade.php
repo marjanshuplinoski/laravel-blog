@@ -3,6 +3,9 @@
     Edit Post
 @endsection
 @section('content')
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>tinymce.init({selector:'textarea'});</script>
+
     <form method="post" action="{{url("/update")}}">
         <input type="hidden" name="_token" value="{{csrf_token()}}">
         <input type="hidden" name="post_id" value="{{$post->id}}{{old('post_id')}}">
@@ -11,7 +14,7 @@
                    value="@if(!old('title')){{$post->title}}@endif {{old('title')}}">
         </div>
         <div class="form-group">
-            <input type="text" required="required" placeholder="Enter SubTitle" name="title" class="form-control"
+            <input type="text" required="required" placeholder="Enter SubTitle" name="subtitle" class="form-control"
                    value="@if(!old('subtitle')){{$post->subtitle}}@endif {{old('subtitle')}}">
         </div>
         <div class="form-group">

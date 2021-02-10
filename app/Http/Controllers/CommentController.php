@@ -10,7 +10,7 @@ class CommentController extends Controller
     public function store(Request $request)
     {
         $comment = new Comments();
-        $comment->from_user = $request->from_user;
+        $comment->from_user = $request->user()->id;
         $comment->on_post = $request->on_post;
         $comment->body = $request->body;
         $slug = $request->slug;

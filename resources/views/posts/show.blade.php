@@ -11,7 +11,7 @@
 @endsection
 
 @section('title-meta')
-    <p>{{$post->created_at->format("d-m-Y")}} by <a href="">{{url("/user/". $post->author_id)}}>{{$post->author}}</a></p>
+    <p>{{$post->created_at->format("d-m-Y")}} by <a href="{{url("/user/". $post->author_id)}}">{{$post->author->name}}</a></p>
 @endsection
 @section('content')
     @if($post)
@@ -25,7 +25,7 @@
             <p>Login to Comment</p>
         @else
             <div class="panel-body">
-                <form method="post" action="/comment/add">
+                <form method="post" action="comment/add">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <input type="hidden" name="on_post" value="{{ $post->id }}">
                     <input type="hidden" name="slug" value="{{ $post->slug }}">

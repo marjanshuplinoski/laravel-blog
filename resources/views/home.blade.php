@@ -4,7 +4,7 @@
 @endsection
 @section('content')
     @if ( !$posts->count() )
-        There is no post till now. Login and write a new post now !!!
+        There is no post. Login and write a new post now !!!
     @else
         <div class="">
             @foreach( $posts as $post )
