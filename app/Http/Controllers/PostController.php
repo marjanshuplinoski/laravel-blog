@@ -82,7 +82,7 @@ class PostController extends Controller
             $slug = Str::slug($title);
             $findDuplicate = Posts::where("slug", $slug)->first();
             if ($findDuplicate) {
-                if ($findDuplicate->id == $post_id) {
+                if ($findDuplicate->id != $post_id) {
                     return redirect("edit/" . $post->slug)->withErrors("Title already exists.")->withInput();
                 } else {
                     $post->slug = $slug;

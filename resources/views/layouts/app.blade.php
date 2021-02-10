@@ -101,7 +101,7 @@
     </div>
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
-            <p>Copyright © 2021</p>
+            <p>Copyright © 2021 - Marjan Shuplinoski</p>
         </div>
     </div>
 </div>

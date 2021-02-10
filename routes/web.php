@@ -39,9 +39,9 @@ Route::middleware(["auth"])->group(function () {
     //delete post
     Route::get("delete/{slug}", [PostController::class, 'destroy']);
     //display user posts
-    Route::get("my_posts", [UserController::class, 'show_user_post']);
+    Route::get("my_posts", [UserController::class, 'show_all_posts_from_user']);
     //display user drafts
-    Route::get("my_drafts", [UserController::class, "show_user_drafts"]);
+    Route::get("my_unpublished_posts", [UserController::class, "show_all_posts_from_user_saved"]);
     //add comment
     Route::post("comment/add", [CommentController::class, "store"]);
     //delete comment
@@ -50,6 +50,6 @@ Route::middleware(["auth"])->group(function () {
 //user profile
 Route::get("user/{id}", [UserController::class, "profile"]);
 //display list of posts
-Route::get("user/{id}/posts", [UserController::class, "user_posts"]);
+Route::get("user/{id}/posts", [UserController::class, "show_all_posts_from_user"]);
 //display single post
 Route::get("/{slug}", [PostController::class, "show"]);
