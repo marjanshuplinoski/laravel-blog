@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LikeDislike;
 use App\Models\Posts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -50,7 +51,7 @@ class PostController extends Controller
             $message = "Post published";
         }
         $post->save();
-        return redirect('edit/'. $post->slug)->withMessage($message);
+        return redirect('edit/' . $post->slug)->withMessage($message);
     }
 
     public function show($slug)
@@ -110,15 +111,25 @@ class PostController extends Controller
     public function destroy(Request $request, $id)
     {
         $post = Posts::findOrFail($id);
-        if ($post && ($post->author_id == $request->user()->id || $request->user()->is_admin()))
-        {
+        if ($post && ($post->author_id == $request->user()->id || $request->user()->is_admin())) {
             $post->delete();
-            $data['message']="Post deleted succesfully";
-        }
-        else {
+            $data['message'] = "Post deleted succesfully";
+        } else {
             $data['message'] = "You have no permission to delete this post";
         }
         return redirect("/")->with($data);
+    }
+
+    public function save_like_dislike(Request $request)
+    {
+        $data = new LikeDislike();
+        $data->post_id = $request->post;
+        if ($request->type = "like")
+            $data->like = 1;
+        else
+            $data->dislike = 1;
+        $data->save();
+        return response()->json(['saved'=>true]);
     }
 
 }

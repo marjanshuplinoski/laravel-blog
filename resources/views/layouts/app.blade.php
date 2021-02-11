@@ -14,6 +14,12 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css"
+          rel="stylesheet">
+    <link
+        href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css"
+        rel="stylesheet" type='text/css'>
+
 </head>
 <body>
 <nav class="navbar navbar-default">
@@ -108,5 +114,34 @@
 <!-- Scripts -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script>
+    $('.saveLikeDislike').click(function () {
+        var post = $(this).data('post');
+        var type = $(this).data('type');
+        var span = $(this);
+        $.ajax({
+            url: "{{url("save_like_dislike")}}",
+            type: "post",
+            dataType: "json",
+            data: {
+                post: post,
+                type: type,
+                _token:"{{csrf_token()}}"
+            },
+            beforeSend: function () {
+                span.addClass('disabled');
+            },
+            success: function (result) {
+                if (result.saved == true) {
+                    span.removeClass("disabled").addClass('active');
+                    span.removeAttr('id');
+                    var count = $("." + type + "-count").text();
+                    count++;
+                    $("." + type + "-count").text(count);
+                }
+            }
+        })
+    });
+</script>
 </body>
 </html>

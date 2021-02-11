@@ -46,6 +46,8 @@ Route::middleware(["auth"])->group(function () {
     Route::post("comment/add", [CommentController::class, "store"]);
     //delete comment
     Route::post("comment/delete/{id}", [CommentController::class, "destroy"]);
+    //Add Like/Dislike
+    Route::post('save_like_dislike',[PostController::class,"save_like_dislike"]);
 });
 //user profile
 Route::get("user/{id}", [UserController::class, "profile"]);
@@ -53,3 +55,5 @@ Route::get("user/{id}", [UserController::class, "profile"]);
 Route::get("user/{id}/posts", [UserController::class, "show_all_posts_from_user"]);
 //display single post
 Route::get("/{slug}", [PostController::class, "show"]);
+
+

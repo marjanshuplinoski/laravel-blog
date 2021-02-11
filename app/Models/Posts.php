@@ -25,4 +25,15 @@ class Posts extends Model
         return $this->belongsTo('App\Models\User', 'author_id');
     }
 
+    //Likes
+    public function likes()
+    {
+        return $this->hasMany("App\Models\LikeDislike",'post_id')->sum("like");
+    }
+    //DisLikes
+    public function dislikes()
+    {
+        return $this->hasMany("App\Models\LikeDislike",'post_id')->sum("dislike");
+    }
+
 }
